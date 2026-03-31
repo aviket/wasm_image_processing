@@ -1686,6 +1686,7 @@ function checkIncomingModuleAPI() {
 
 // Imports from the Wasm binary.
 var _grayscale = Module['_grayscale'] = makeInvalidEarlyAccess('_grayscale');
+var _sepia = Module['_sepia'] = makeInvalidEarlyAccess('_sepia');
 var _fflush = makeInvalidEarlyAccess('_fflush');
 var _strerror = makeInvalidEarlyAccess('_strerror');
 var _malloc = Module['_malloc'] = makeInvalidEarlyAccess('_malloc');
@@ -1703,6 +1704,7 @@ var wasmMemory = makeInvalidEarlyAccess('wasmMemory');
 
 function assignWasmExports(wasmExports) {
   assert(typeof wasmExports['grayscale'] != 'undefined', 'missing Wasm export: grayscale');
+  assert(typeof wasmExports['sepia'] != 'undefined', 'missing Wasm export: sepia');
   assert(typeof wasmExports['fflush'] != 'undefined', 'missing Wasm export: fflush');
   assert(typeof wasmExports['strerror'] != 'undefined', 'missing Wasm export: strerror');
   assert(typeof wasmExports['malloc'] != 'undefined', 'missing Wasm export: malloc');
@@ -1717,6 +1719,7 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports['memory'] != 'undefined', 'missing Wasm export: memory');
   assert(typeof wasmExports['__indirect_function_table'] != 'undefined', 'missing Wasm export: __indirect_function_table');
   _grayscale = Module['_grayscale'] = createExportWrapper('grayscale', 2);
+  _sepia = Module['_sepia'] = createExportWrapper('sepia', 2);
   _fflush = createExportWrapper('fflush', 1);
   _strerror = createExportWrapper('strerror', 1);
   _malloc = Module['_malloc'] = createExportWrapper('malloc', 1);

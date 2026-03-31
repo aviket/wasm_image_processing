@@ -58,3 +58,26 @@ document.getElementById("grayscaleBtn").addEventListener("click", () => {
 
     wasmModule._free(ptr);
 });
+
+document.getElementById("sepiaBtn").addEventListener("click", () => {
+
+    if (!wasmModule) {
+        alert("WASM not loaded yet");
+        return;
+    }
+
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    const ptr = wasmModule._malloc(data.length);
+    wasmModule.HEAPU8.set(data, ptr);
+
+    wasmModule._sepia(ptr, data.length);
+
+    const result = wasmModule.HEAPU8.subarray(ptr, ptr + data.length);
+    imageData.data.set(result);
+
+    ctx.putImageData(imageData, 0, 0);
+
+    wasmModule._free(ptr);
+});
