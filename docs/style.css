@@ -62,3 +62,19 @@ input[type="range"] {
 #downloadBtn:hover {
     background: #2e7d32;
 }
+
+#undoBtn {
+    background: #f57c00;
+}
+
+#undoBtn:hover {
+    background: #ef6c00;
+}
+
+#redoBtn {
+    background: #8e24aa;
+}
+
+#redoBtn:hover {
+    background: #6a1b9a;
+}
