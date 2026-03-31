@@ -54,3 +54,11 @@ input[type="range"] {
     margin-left: 10px;
     font-weight: bold;
 }
+
+#downloadBtn {
+    background: #43a047;
+}
+
+#downloadBtn:hover {
+    background: #2e7d32;
+}

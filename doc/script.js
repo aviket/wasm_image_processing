@@ -112,3 +112,17 @@ document.getElementById("blurBtn").addEventListener("click", () => {
 
     wasmModule._free(ptr);
 });
+
+document.getElementById("downloadBtn").addEventListener("click", () => {
+
+    // Convert canvas → image
+    const dataURL = canvas.toDataURL("image/png");
+
+    // Create temporary download link
+    const link = document.createElement("a");
+    link.href = dataURL;
+    link.download = "edited-image.png";
+
+    // Trigger download
+    link.click();
+});
