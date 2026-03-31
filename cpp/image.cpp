@@ -36,6 +36,46 @@ void sepia(uint8_t* data, int length) {
     }
 }
 
+// NEW: Blur filter
+EMSCRIPTEN_KEEPALIVE
+void blur(uint8_t* data, int width, int height, int radius) {
+
+    int size = width * height * 4;
+    uint8_t* temp = new uint8_t[size];
+
+    // Copy original
+    for (int i = 0; i < size; i++) temp[i] = data[i];
+
+    int kernelSize = (2 * radius + 1) * (2 * radius + 1);
+
+    for (int y = radius; y < height - radius; y++) {
+        for (int x = radius; x < width - radius; x++) {
+
+            int r = 0, g = 0, b = 0;
+
+            for (int dy = -radius; dy <= radius; dy++) {
+                for (int dx = -radius; dx <= radius; dx++) {
+
+                    int idx = ((y + dy) * width + (x + dx)) * 4;
+
+                    r += temp[idx];
+                    g += temp[idx + 1];
+                    b += temp[idx + 2];
+                }
+            }
+
+            int idx = (y * width + x) * 4;
+
+            data[idx]     = r / kernelSize;
+            data[idx + 1] = g / kernelSize;
+            data[idx + 2] = b / kernelSize;
+        }
+    }
+
+    delete[] temp;
+}
+
+
 }
 
 // use this to compile
